@@ -1,11 +1,20 @@
 services:
-  app:
+  server:
     build:
       context: .
       dockerfile: server/Dockerfile
-    command: sh -c "npm install && npm run start-dev"
     ports:
       - 127.0.0.1:3000:3000
-    working_dir: /app/server
     volumes:
-      - ./server:/app/server
+      - ./server:/app
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    ports:
+      - 127.0.0.1:1234:1234
+    volumes:
+      - ./client:/app
+    depends_on:
+      - server

@@ -2,10 +2,11 @@ FROM node
 
 WORKDIR /app
 
-COPY . .
+COPY client/package.json .
 
-RUN npm install && npm run build
+RUN npm install 
+COPY client/ .
 
 EXPOSE 1234
 
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
